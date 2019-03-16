@@ -1,0 +1,39 @@
+.game {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.location {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background-color: #000000;
+}
+
+.apple {
+    background-color: #dc143c;
+}
+
+.snake {
+    background-color: #eeeeee;
+}
+
+button {
+    -webkit-appearance: none;
+    padding: 0.5em 1.5em;
+    margin: 0.25em;
+}
+.selected {
+    background-color: #66cd00;
+}
+.disable {
+    pointer-events: none;
+    background-color: #aaaaaa;
+}
+
+@media (min-width: 50em) {
+    .location {
+        width: 8px;
+        height: 8px;
+    }
+}
