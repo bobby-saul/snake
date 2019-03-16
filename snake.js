@@ -159,7 +159,7 @@
                         highScore[difficulty] = (length - 1) * 10;
                     }
                     saveCookie();
-                    $(".high-score-value").text((length - 1) * 10);
+                    $(".high-score-value").text(highScore[difficulty]);
 
                     // reset buttons
                     $(".arrow").off("click");
