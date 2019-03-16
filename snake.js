@@ -165,7 +165,8 @@
                     $(".arrow").off("click");
                     $("window").off("keydown");
                     $(".difficulty").removeClass("disable");
-                    $(".start").removeClass("disable").on("click", playGame);
+                    $(".start").removeClass("disable");
+                    $(".start").on("click", playGame);
                     $(window).on("keydown", function (e) {
                         switch (e.which) {
                             case 32:
@@ -188,6 +189,7 @@
         function playGame() {
             // disable start buttons
             $(".start, .difficulty").addClass("disable");
+            $(".start").off("click");
             $(window).off("keydown");
             // reset start 
             direction = 3;
