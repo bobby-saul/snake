@@ -8,7 +8,8 @@
         var snake = [position];
         var length = 1;
         var direction = 3; // 1 = top; 2 = bottom; 3 = right; 4 = left;
-        var frameTime = [250, 150, 50];
+        var frameTime = [250, 175, 100];
+        var currentTime;
         var xDown = null;                                                        
         var yDown = null;
         var highScore = [0, 0, 0];
@@ -147,16 +148,19 @@
 
                 // check if apple eaten
                 if (position[0] === apple[0] && position[1] === apple[1]) {
-                    length = length + 1;
-                    $(".score-value").text((length - 1) * 10);
+                    length = length + 1 + difficulty;
+                    $(".score-value").text(parseInt($(".score-value").text()) + 10);
                     placeApple();
+                    if (currentTime > (frameTime[difficulty] / 4)) {
+                        currentTime = currentTime - 10;
+                    }
                 }
 
                 // if game should be over
                 if (position[0] < 0 || position[0] >= size || position[1] < 0 || position[1] >= size || $(".location[row='" + position[1] + "'][column='" + position[0] + "']").hasClass("snake")) {
                     // if high score
-                    if ((length - 1) * 10 > highScore[difficulty]){
-                        highScore[difficulty] = (length - 1) * 10;
+                    if (parseInt($(".score-value").text()) > highScore[difficulty]){
+                        highScore[difficulty] = parseInt($(".score-value").text());
                     }
                     saveCookie();
                     $(".high-score-value").text(highScore[difficulty]);
@@ -183,7 +187,7 @@
                     drawSnake();
                     moveSnake();
                 }
-            }, frameTime[difficulty]);
+            }, currentTime);
         }
 
         function playGame() {
@@ -193,6 +197,7 @@
             $(window).off("keydown");
             // reset start 
             direction = 3;
+            currentTime = frameTime[difficulty];
             position = [Math.floor(size / 2), Math.floor(size / 2)];
             snake = [position];
             length = 1;
@@ -238,6 +243,8 @@
         };                                                
 
         function handleTouchMove(evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
             if ( ! xDown || ! yDown ) {
                 return;
             }
@@ -286,6 +293,6 @@
 
         // get swipes for touch screens
         $(".board").on('touchstart', handleTouchStart);        
-        $(".board").on('touchmove', handleTouchMove);        
+        $(".board").on('touchmove', handleTouchMove);
     });
 })(jQuery)
