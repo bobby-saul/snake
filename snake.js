@@ -35,9 +35,10 @@
             // expired date for cookie 
 			var expireDate = new Date();
 			// set for one year
-            expireDate.setTime(expireDate.getTime() + (31536000000));
+            expireDate.setTime(expireDate.getTime() + (2592000000));
+            console.log(expireDate);
             // set cookie
-            document.cookie = "highScore=" + encodeURIComponent(highScore.join()) + ";expire=" + expireDate.toUTCString() + ";";
+            document.cookie = "highScore=" + encodeURIComponent(highScore.join()) + ";expires=" + expireDate.toUTCString() + ";";
         }
 
         // build board array
